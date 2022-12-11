@@ -1,9 +1,6 @@
 package com.magicmetro.entity;
 
 
-
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -21,10 +18,10 @@ public class User {
 	private int userId;
 	private String password;
 	private String fullName;
+	private String address;
 	private String phoneNumber;
 	private double balance; 
-	private LocalDate swipeIn;
-	private LocalDate swipeOut;
+
 	
 	
 
