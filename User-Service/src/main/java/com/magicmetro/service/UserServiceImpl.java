@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 			
 			try {
 				
-				userDao.insertUser(user.getUserId(), user.getPassword(), user.getFullName(),
+				userDao.addUser(user.getUserId(), user.getPassword(), user.getFullName(),
 				user.getAddress(), user.getPhoneNumber(), user.getBalance());
 				
 				return true;
@@ -43,9 +43,24 @@ public class UserServiceImpl implements UserService {
 
 	}
 	
+	@Override 
+	public User searchUserById(int id) {
+		return userDao.searchUserById(id);
+	}
+	
+	
 	@Override
-	public User getUserById(int id) {
-		return userDao.getById(id);
+	public boolean updateUserBalance(int id, double inc) {
+		
+		User user = userDao.searchUserById(id);
+		
+		if (user != null) {
+			userDao.updateBalance(id, inc);
+			return true;
+		}
+		else {
+			return false;
+		}
 		
 	}
 }		

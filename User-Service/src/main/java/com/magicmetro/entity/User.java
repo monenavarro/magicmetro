@@ -2,6 +2,7 @@ package com.magicmetro.entity;
 
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="user")
 public class User {
 	
 	@Id

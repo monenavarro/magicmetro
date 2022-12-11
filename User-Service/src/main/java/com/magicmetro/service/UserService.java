@@ -5,6 +5,7 @@ import com.magicmetro.entity.User;
 public interface UserService {
 	
 	boolean addUser(User user);
-	public User getUserById(int id);
+	public User searchUserById(int id);
+	public boolean updateUserBalance(int id, double inc);
 
 }
