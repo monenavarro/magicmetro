@@ -4,7 +4,7 @@
 
 ## Project Scenario 📖
 *Design and develop an application for central metro system. The application needs to provide the swipe in and swipe out functionality.
-Swipe in refers to boarding the station. Swipe out refers to coming out of the station. Every metro station has both swipe in and out facilities. There will be a metro card issued to every user with a minimum balance of Rs 100.*
+Swipe in refers to boarding the station. Swipe out refers to coming out of the station. Every metro station has both swipe in and out facilities. There will be a metro card issued to every user with a minimum balance of £5.00.*
 <br />
 <br />
 The metro line consists of 5 linear stations. <br />
@@ -14,14 +14,14 @@ The metro line consists of 5 linear stations. <br />
 - For **'Swipe in'** functionality, the application should:
     1. Accept the user’s input as source station.
     2. The station can be from the above list only. 
-    3. Validate the minimum required balance in the card. The user should have minimum balance of Rs 20 in the card. 
+    3. Validate the minimum required balance in the card. The user should have minimum balance of £5.00 in the card. 
     4. On successful swipe in, which means if the minimum balance is present then print the message as “You have successfully swiped in at the station” +          *Source Station Name*  <br />
     <br />
 - For **'Swipe out'** functionality, the application should:
     1. Accept the user’s input for destination station.
     2. The station can be from the above list only. 
     3. Calculate the total fare based on source and destination stations and deduct the fare from the card balance. The fare calculation is based on the          below rules:
-          1. Fare between any 2 adjacent stations is Rs 5. Example – Fare between L1 and L2 is Rs 5 and fare between L2 and L3 is Rs 5.
+          1. Fare between any 2 adjacent stations is £2.00. Example – Fare between L1 and L2 is £2.00 and fare between L2 and L3 is £2.00.
           2. After deducting balance, the message needs to be printed “You have successfully swiped out with card balance as” + *Result Card Balance*.
 
 ## Planning and Implementation ⚙️ <br />
