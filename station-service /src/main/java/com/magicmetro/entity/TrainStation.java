@@ -1,19 +1,22 @@
 package com.magicmetro.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class trainStation {
+@Table(name="station")
+public class TrainStation {
 
-@Id
+    @Id
     private int stationId;
     private String stationName;
-
 }
