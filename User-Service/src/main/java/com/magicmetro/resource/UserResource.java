@@ -18,24 +18,31 @@ public class UserResource {
 	
 	
 	// ============ resource for search user by Id ==================
-			@RequestMapping(path = "/users/{uid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-			public User serachUserByIdResource(@PathVariable("uid") int id) {
-				return userService.searchUserById(id);
-				
-			}
+	@RequestMapping(path = "/users/{uid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public User serachUserByIdResource(@PathVariable("uid") int id) {
+		return userService.searchUserById(id);
+		
+	}
 	
 	
 	// ============ resource for update user balance ==================
-		@RequestMapping(path = "/users/{uid}/{inc}", method = RequestMethod.PUT, produces = MediaType.TEXT_PLAIN_VALUE)
-		public String updateUserBalanceResource(@PathVariable("uid") int id, @PathVariable("inc") double inc) {
-			if (userService.updateUserBalance(id, inc)) {
-				return "Balance Updated";
-			}
-			else {
-				return "Balance NOT Updated";
-			}
-			
+	@RequestMapping(path = "/users/{uid}/{inc}", method = RequestMethod.PUT, produces = MediaType.TEXT_PLAIN_VALUE)
+	public String updateUserBalanceResource(@PathVariable("uid") int id, @PathVariable("inc") double inc) {
+		if (userService.updateUserBalance(id, inc)) {
+			return "Balance Updated";
 		}
+		else {
+			return "Balance NOT Updated";
+		}
+		
+	}
+		
+	// ============ resource for login check by id and password ==================
+	@RequestMapping(path = "/users/{userId}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public User loginCheckResource(@PathVariable("userId") int userId, @PathVariable("password") String password){
+		return userService.loginCheck(userId, password);
+	}
+	
 		
 
 }

@@ -34,6 +34,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Override
+	public User loginCheck(int userId, String password) {
+		User user = userDao.findUserByIdAndPassword(userId, password);
+		
+		return user;
+	}	
+	
 //	@Override
 //	public boolean updateUserBalance(int id, double inc) {
 //		
