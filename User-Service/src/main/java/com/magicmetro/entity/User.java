@@ -19,6 +19,7 @@ public class User {
 	private int userId;
 	private String password;
 	private String fullName;
+	private String address;
 	private String phoneNumber;
 	private double balance; 
 	

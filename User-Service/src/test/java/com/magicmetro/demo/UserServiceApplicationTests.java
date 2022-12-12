@@ -47,10 +47,10 @@ class UserServiceApplicationTests {
 	@Test
 	void testSearchUserById() {
 		// specify test user searched for my dao method
-		User testUser = userDao.searchUserById(102);
-		System.out.println(testUser);
+		when(userDao.searchUserById(102)).thenReturn(new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+		User testUser = userServiceImpl.searchUserById(102);
 		// assert that this test user equals the correct output
-		assertEquals(testUser, new User(102, "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+		assertEquals(testUser, new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
 	}
 	
 	@Test 
@@ -59,7 +59,8 @@ class UserServiceApplicationTests {
 		//User test2User = userDao.findById(103).orElse(null);
 		// assert that this test user equals the correct output
 		//assertNotEquals(test2User, new User(102, "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
-		assertNull(userDao.searchUserById(1111));
+		when(userDao.searchUserById(1111)).thenReturn(null);
+		assertNull(userServiceImpl.searchUserById(1111));
 	}
 	
 	
@@ -67,7 +68,7 @@ class UserServiceApplicationTests {
 	void testUpdateUserBalance() {
 		// specify behaviour of mock serviceImpl method
 		// if DAO search record method returns book object (not null)
-		when(userDao.searchUserById(102)).thenReturn(new User(102, "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+		when(userDao.searchUserById(102)).thenReturn(new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
 		// assert that the Service new Pages method returns True
 		// test the method
 		assertTrue(userServiceImpl.updateUserBalance(102, 1.00));
