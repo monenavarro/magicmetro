@@ -2,6 +2,7 @@ package com.magicmetro.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.when;
 
 
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +41,7 @@ class StationServiceApplicationTests {
 
 	@Test
 	void testSearchTrainStationById() {
-
+		when(trainStationDao.searchTrainStationById(1)).thenReturn(new TrainStation(1, "Platform 9 3/4"));
 		TrainStation testTrainStation = trainStationDao.searchTrainStationById(1);
 		System.out.println(testTrainStation);
 		assertEquals(testTrainStation, new TrainStation(1, "Platform 9 3/4"));
