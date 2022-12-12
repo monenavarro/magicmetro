@@ -60,9 +60,17 @@ public class UserServiceImpl implements UserService {
 		}
 		else {
 			return false;
-		}
+		}		
 		
 	}
-}		
+
+	@Override
+	public User loginCheck(int userId, String password) {
+		User user = userDao.findUserByIdAndPassword(userId, password);
+		
+		return user;
+	}		
+	
+}
 		
 	

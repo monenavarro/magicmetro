@@ -7,5 +7,6 @@ public interface UserService {
 	boolean addUser(User user);
 	public User searchUserById(int id);
 	public boolean updateUserBalance(int id, double inc);
+	User loginCheck(int userId, String password);
 
 }

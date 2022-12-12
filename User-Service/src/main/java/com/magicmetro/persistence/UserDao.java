@@ -14,7 +14,7 @@ import com.magicmetro.entity.User;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 	
-	//JPQL query for searching user by Id input
+		//JPQL query for searching user by Id input
 		@Query("from User where userId=:id")
 		User searchUserById(@Param("id") int id);
 		
@@ -23,14 +23,19 @@ public interface UserDao extends JpaRepository<User, Integer> {
 		@Transactional
 		@Query("update User set balance=balance+:inc where userId=:id")
 		int updateBalance(@Param("id") int id,@Param("inc") double increment);
+		
+		@Query("from User where userId=:id and password=:passw")
+		User findUserByIdAndPassword(@Param("id") int userId, @Param("passw") String password);
 	
-	//Native Query
-	@Modifying
-	@Transactional
-	@Query(value = "insert into user values (:uid,:pw,:name,:ad,:num,:bal)", nativeQuery = true)
-	int addUser(@Param("uid") int userid, @Param("pw") String password, @Param("name") String fullName,
-			 @Param("ad") String address, @Param("num") String phoneNumber, @Param("bal") double balance
-			) throws SQLIntegrityConstraintViolationException;
+		//Native Query
+		@Modifying
+		@Transactional
+		@Query(value = "insert into user values (:uid,:pw,:name,:ad,:num,:bal)", nativeQuery = true)
+		int addUser(@Param("uid") int userid, @Param("pw") String password, @Param("name") String fullName,
+				@Param("ad") String address, @Param("num") String phoneNumber, @Param("bal") double balance
+				) throws SQLIntegrityConstraintViolationException;
+	
+	
 
 	
 

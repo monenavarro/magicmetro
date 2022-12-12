@@ -53,15 +53,67 @@ class TestUserService {
 	
 		
 	}
-//	@Test
-//	void testAddUserTwo() {
-//		
-//		when(userDao.findById(101)).thenReturn(null);
-//		
-//		assertTrue(userServiceImpl.addUser(new User(101, "password1", "Neah Demi", "123 Elm Street",
-//				"07846352853", 8.50, LocalDate.now(), LocalDate.now())));
-//	
-//		
-//	}
+	@Test
+	void testAddUserTwo() {
+		
+		when(userDao.searchUserById(101)).thenReturn(null);
+		
+		assertTrue(userServiceImpl.addUser(new User(101, "password1", "Neah Demi", "123 Elm Street",
+				"07846352853", 8.50)));	
+	}
+	
+	@Test
+	void testSearchUserById() {
+		when(userDao.searchUserById(102)).thenReturn(new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+		User testUser = userServiceImpl.searchUserById(102);
+		assertEquals(testUser, new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+	}
+	
+	@Test 
+	void testSearchUserById2() {
+		// specify test user searched for my dao method
+		when(userDao.searchUserById(1111)).thenReturn(null);
+		// assert that this test user equals the correct output
+		assertNull(userServiceImpl.searchUserById(1111));
+	}
+	
+	
+	@Test
+	void testUpdateUserBalance() {
+		// specify behaviour of mock serviceImpl method
+		// if DAO search record method returns book object (not null)
+		when(userDao.searchUserById(102)).thenReturn(new User(102, "password2", "Rachel Vickerman", "12 Top Towie Avenue", "07846333353", 6.00));
+		// assert that the Service new Pages method returns True
+		// test the method
+		assertTrue(userServiceImpl.updateUserBalance(102, 1.00));
+	
+	}
+	
+	@Test
+	void testUpdateUserBalance2() {
+		// specify behaviour of mock serviceImpl method
+		// if DAO search record method returns book object (not null)
+		when(userDao.searchUserById(102)).thenReturn(null);
+		// assert that the Service new Pages method returns True
+		// test the method
+		assertFalse(userServiceImpl.updateUserBalance(102, 1.00));
+	
+	}
+	
+	@Test
+	void testLoginCheckOne() {
+		when(userDao.findUserByIdAndPassword(101, "password1")).thenReturn(new User(101, "password1", "Neah Demi", "123 Elm Street", "07846352853", 8.5));
+		
+		User user = new User(101, "password1", "Neah Demi", "123 Elm Street", "07846352853", 8.5);
+		
+		assertEquals(user, userServiceImpl.loginCheck(101, "password1"));
+	}
+	
+	@Test
+	void testLoginCheckTwo() {
+		assertNull(userDao.findUserByIdAndPassword(102, "password1"));
+	}
+	
+	
 
 }
