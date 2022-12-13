@@ -3,6 +3,7 @@ package com.magicmetro.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,14 @@ public class UserResource {
 		return userService.loginCheck(userId, password);
 	}
 	
-		
+	// ============ resource for add new user  ==================
+	@RequestMapping(path = "/users", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public User addUserResource(@RequestBody User user) {
+		if (userService.addUser(user))
+			return user;
+		else
+			return null;
+	}
+			
 
 }

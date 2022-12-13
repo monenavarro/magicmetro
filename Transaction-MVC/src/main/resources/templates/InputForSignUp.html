@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org"> 
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Sign Up to the Magic Metro System</h1>
+<form action = "./addUser" method = "post">
+	Enter User ID : <input type="text" name="userId"><br><br>
+	Enter Password : <input type="password" name="password"><br><br>
+	Enter Full Name : <input type="text" name="fullName"><br><br>
+	Enter Address : <input type="text" name="address"><br><br>
+	Enter Phone Number : <input type="text" name="phoneNumber"><br><br>
+	Enter Balance : <input type="text" name="balance"><br><br>
+	<input type="submit" value ="login User">
+<h2 th:text="${message}"></h2>
+</form>
+</body>
+</html>

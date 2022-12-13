@@ -24,6 +24,19 @@ public class TransactionServiceImpl implements TransactionService {
 		return user;
 	}
 	
+	@Override
+	public boolean UserSignUp(User userToAdd) {
+		//User userToAdd = new User(uid, pass, name, adr, phone, bal);
+		// use the add user method of the user-service api - returns boolean
+		User addStatus = restTemplate.postForObject("http://localhost:8082/users", userToAdd, User.class); 
+		// if method worked, return true if not return false
+		if (addStatus != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	@Override
 	public boolean CheckUserBalance(int userId) {

@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +22,36 @@ public class TransactionController {
 	public ModelAndView UserLoginInputController() {
 		return new ModelAndView("InputUserIdAndPassword");
 	}
+	
+	// ==================Controllers for User Sign Up ========================
+	@RequestMapping("/signUp")
+	public ModelAndView UserSignUpController() {
+		return new ModelAndView("InputForSignUp");
+	}
+	
+	@RequestMapping("/addUser")
+	public ModelAndView UserAddController(@RequestParam("userId") int userId, @RequestParam("password") String pass, @RequestParam("fullName") String name, @RequestParam("address") String adr, @RequestParam("phoneNumber") String phone, @RequestParam("balance") double bal, HttpSession session) {
+		// create empty MAV 
+		ModelAndView modelAndView = new ModelAndView();
+		// create user to be added to table in database of user-service api
+		User userToAdd = new User(userId, pass, name, adr, phone, bal);
+		// perform service method for user sign up
+		boolean addStatus = transactionService.UserSignUp(userToAdd);
+		
+		if (addStatus == true) {
+			modelAndView.addObject("message","Successfully Signed Up, you are now Logged In!");
+			session.setAttribute("user", userToAdd);
+			modelAndView.setViewName("MainMenu");
+		}
+		else {
+			modelAndView.addObject("message", "Failed to Sign Up, please try again");
+			session.setAttribute("user", new User());
+			modelAndView.setViewName("InputForSignUp");
+		}
+		
+		return modelAndView;
+	}
+	
 	
 	// ==================Controller for checking User Login ========================
 	@RequestMapping("/checkUser")
@@ -55,6 +84,11 @@ public class TransactionController {
 		
 		return modelAndView;
 		
+	}
+	
+	@RequestMapping("/logOut")
+	public ModelAndView logOutController() {
+		return new ModelAndView("/");
 	}
 	
 	// ==================Controllers for Checking User Balance ========================
@@ -112,7 +146,37 @@ public class TransactionController {
 	}
 	
 	// ==================Controllers for Swiping In ========================
+	@RequestMapping("/swipeIn")
+	public ModelAndView swipeInController(HttpSession session){
+		//timestamp start here
+		return new ModelAndView ("trainStationChoice");
+		// model and view page option train stations
+		// model and view back to main menu with swipe in chosen + time stamp
+	}
+
+	@RequestMapping("/chooseStartStation")
+		public ModelAndView chooseStartStationController(HttpSession session, @RequestParam("stationId") int stationId ){
+		ModelAndView modelAndView = new ModelAndView();
+		// use session to get user object of logged in user and hence their userId
+		User userObj = (User) session.getAttribute("user");
+		int userId = userObj.getUserId();
 	
+		return modelAndView;
+	}
 	// ==================Controllers for Swiping Out ========================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

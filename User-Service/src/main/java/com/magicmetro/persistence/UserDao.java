@@ -1,6 +1,8 @@
 package com.magicmetro.persistence;
 
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,6 +28,14 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
 	@Query("from User where userId=:id and password=:passw")
 	User findUserByIdAndPassword(@Param("id") int userId, @Param("passw") String password);
+
+	//Native Query for adding user object to table in database
+	@Modifying
+	@Transactional
+	@Query(value = "insert into user values (:uid,:pw,:name,:ad,:num,:bal)", nativeQuery = true)
+	int addUser(@Param("uid") int userid, @Param("pw") String password, @Param("name") String fullName,
+			@Param("ad") String address, @Param("num") String phoneNumber, @Param("bal") double balance
+			) throws SQLIntegrityConstraintViolationException;
 
 	
 }
