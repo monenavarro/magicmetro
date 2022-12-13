@@ -18,11 +18,13 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
+	// ==================Controllers for User Login, first page ========================
 	@RequestMapping("/")
 	public ModelAndView UserLoginInputController() {
 		return new ModelAndView("InputUserIdAndPassword");
 	}
 	
+	// ==================Controller for checking User Login ========================
 	@RequestMapping("/checkUser")
 	public ModelAndView checkUserLoginController(@RequestParam("userId") int id, @RequestParam("password") String password,  HttpSession session) {
 		// create empty MAV 
@@ -55,21 +57,24 @@ public class TransactionController {
 		
 	}
 	
+	// ==================Controllers for Checking User Balance ========================
 	@RequestMapping("/checkBalance")
 	public ModelAndView checkBalanceController(HttpSession session) {
 		// create empty MAV 
 		ModelAndView modelAndView = new ModelAndView();
 		
 		User userObj = (User) session.getAttribute("user");
-		int userId = userObj.getUserId();		// use service method (which user user-service api) to check user balance
+		int userId = userObj.getUserId();	
+		double userBalance = userObj.getBalance();
+		// use service method (which user user-service api) to check user balance
 		boolean balanceStatus = transactionService.CheckUserBalance(userId);
 		
 		if (balanceStatus == true) {
-			modelAndView.addObject("message","Your Balance is Sufficient!");
+			modelAndView.addObject("message","Your Balance is Sufficient, it is currently : £"+userBalance);
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
-			modelAndView.addObject("message","Your Balance is Insufficient, please Top Up!");
+			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+" please Top Up!");
 			modelAndView.setViewName("MainMenu");
 		}
 		
@@ -77,4 +82,37 @@ public class TransactionController {
 		
 		
 	}
+	
+	// ==================Controllers for Updating/Top Up User Balance ========================
+	@RequestMapping("/topUpBalanceInputPage")
+	public ModelAndView topUpBalanaceInputController() {
+		return new ModelAndView("InputTopUp");
+	}
+	
+	@RequestMapping("/topUpBalance")
+	public ModelAndView topUpBalanceController(@RequestParam("topUp") double topUp, HttpSession session) {
+		// create empty MAV 
+		ModelAndView modelAndView = new ModelAndView();
+		// use session to get user object of logged in user and hence their userId
+		User userObj = (User) session.getAttribute("user");
+		int userId = userObj.getUserId();
+		// perform top up balance method of service (which uses update user balance method of user-service api)
+		boolean toppedUp = transactionService.TopUpBalance(userId, topUp);
+		
+		if (toppedUp == true) {
+			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by "+topUp);
+			modelAndView.setViewName("MainMenu");
+		}
+		else {
+			modelAndView.addObject("message","Failed to Top Up your Balance, Please Try Again");
+			modelAndView.setViewName("MainMenu");
+		}
+		
+		return modelAndView;
+	}
+	
+	// ==================Controllers for Swiping In ========================
+	
+	// ==================Controllers for Swiping Out ========================
+	
 }

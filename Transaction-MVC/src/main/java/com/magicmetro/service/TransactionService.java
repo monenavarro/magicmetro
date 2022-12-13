@@ -11,7 +11,7 @@ public interface TransactionService {
 	
 	boolean CheckUserBalance(int userId);
 
-	boolean TopUpBalance(int userId, int increment);
+	boolean TopUpBalance(int userId, double increment);
 	
 //	boolean SwipeIn(int userId, String startStationName);
 //	
