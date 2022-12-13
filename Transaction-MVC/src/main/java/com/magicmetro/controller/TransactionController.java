@@ -192,9 +192,7 @@ public class TransactionController {
 			
 			// formatter, recording and formatting of timeStamp variable for swipeIn time
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			LocalDateTime time = LocalDateTime.now();
-			time.format(formatter);
-			transaction.setSwipeInTime(time);
+			transaction.setSwipeInTime(LocalDateTime.now());
 			
 			// set transaction as session attribute
 			session.setAttribute("Transaction", transaction);
@@ -234,9 +232,7 @@ public class TransactionController {
 		// set end station and swipeOut time in transaction object
 		transaction.setEndStationId(stationId);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		LocalDateTime time = LocalDateTime.now();
-		time.format(formatter);
-		transaction.setSwipeOutTime(time);
+		transaction.setSwipeOutTime(LocalDateTime.now());
 		
 		// calculate price of train journey 
 		double price = Math.abs(transaction.getEndStationId() - transaction.getStartStationId());
@@ -249,7 +245,7 @@ public class TransactionController {
 		
 		// add message to MAV and display on MainMenu view
 		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+userEnd.getBalance());
-		modelAndView.setViewName("MainMenu");
+		//modelAndView.setViewName("MainMenu");
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("startStation", startStation);
 		modelAndView.addObject("endStation", endStation);

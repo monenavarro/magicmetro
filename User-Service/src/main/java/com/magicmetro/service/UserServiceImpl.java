@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean addUser(User user) {
 		User users = userDao.findById(user.getUserId()).orElse(null);
-		System.out.println(users);
 		if(users == null) {
 				
 				//try {

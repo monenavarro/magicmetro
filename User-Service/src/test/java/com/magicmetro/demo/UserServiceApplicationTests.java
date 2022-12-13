@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -86,6 +88,25 @@ class UserServiceApplicationTests {
 	
 	}
 	
+	@Test
+	void testAddUserOne() {
+		
+		when(userDao.findById(101)).thenReturn(Optional.of(new User(101, "password1", "Neah Demi", "123 Elm Street",
+				"07846352853", 8.50)));
+		
+		assertFalse(userServiceImpl.addUser(new User(101, "password1", "Neah Demi", "123 Elm Street",
+				"07846352853", 8.50)));
+	
+		
+	}
+	@Test
+	void testAddUserTwo() {
+		
+		when(userDao.searchUserById(101)).thenReturn(null);
+		
+		assertTrue(userServiceImpl.addUser(new User(101, "password1", "Neah Demi", "123 Elm Street",
+				"07846352853", 8.50)));	
+	}
 
 
 }

@@ -18,12 +18,5 @@ public interface TransactionService {
 	
 	trainStation GetStationDetails(int stationId);
 	
-//	boolean SwipeIn(int userId, String startStationName);
-//	
-//	boolean SwipeOut(String endStationName);
-	
-	List<Transaction> TransactionDetails(int userId);
-	
-	
 
 }

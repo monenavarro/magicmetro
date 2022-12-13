@@ -1,13 +1,8 @@
 package com.magicmetro.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
 import com.magicmetro.entity.trainStation;
 
@@ -63,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 			double balanceBefore = userThen.getBalance();
 			
 			// top up balance with update user balance method from user-service api
-			restTemplate.put("http://localhost:8082/users/"+userId+"/"+increment, boolean.class);
+			restTemplate.put("http://localhost:8082/users/"+userId+"/"+increment, void.class);
 			
 			// get new instance of user object (with updated balance) using id argument through search by user id resource of user-service api
 			User userNow = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
@@ -92,28 +87,7 @@ public class TransactionServiceImpl implements TransactionService {
 		// return the object 
 		return station;
 	}
-	
-//	@Override
-//	public boolean SwipeIn(int userId, String startStationName) {
-//		// validate balance 
-//		
-//		
-//		// time-stamp
-//		// true= in, false = no
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean SwipeOut(String endStationName) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 
-	@Override
-	public List<Transaction> TransactionDetails(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 
