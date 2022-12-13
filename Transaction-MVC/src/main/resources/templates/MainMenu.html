@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+<h1>Magic Metro Menu</h1>
+<hr>
+<h3 th:text="'Welcome '+${session.user.fullName}+'!'"></h3>
+<hr>
+<a href="./checkBalance">Check Balance</a><br><br>
+<a href="./topUpBalanceInputPage">Top Up Balance</a><br><br>
+<a href="./swipeIn">Swipe In</a><br><br>
+<a href="./swipeOut">Swipe Out</a><br><br>
+<h2 th:text="${message}"></h2>
+</body>
+</body>
+</html>
