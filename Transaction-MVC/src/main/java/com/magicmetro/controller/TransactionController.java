@@ -3,6 +3,7 @@ package com.magicmetro.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +51,7 @@ public class TransactionController {
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
-			modelAndView.addObject("message", "Failed to Sign Up, please try again");
+			modelAndView.addObject("message", "Failed to Sign Up, User already exists! Please try logging in or signing up with different details");
 			session.setAttribute("user", new User());
 			modelAndView.setViewName("InputForSignUp");
 		}
@@ -90,7 +91,7 @@ public class TransactionController {
 			// reset customer object for another login try
 			modelAndView.addObject("user", new User());
 			// show the Login page on the web app
-			modelAndView.setViewName("/");
+			modelAndView.setViewName("InputUserIdAndPassword");
 		}
 		
 		return modelAndView;
@@ -152,7 +153,7 @@ public class TransactionController {
 		userObj.setBalance(oldBalance+topUp);
 		
 		if (toppedUp == true) {
-			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by "+topUp);
+			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by £"+topUp);
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
@@ -196,8 +197,14 @@ public class TransactionController {
 			transaction.setStartStationId(stationId);
 			
 			// formatter, recording and formatting of timeStamp variable for swipeIn time
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			transaction.setSwipeInTime(LocalDateTime.now());
+			// record and set swipeIn time in transaction object
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy MM dd");
+			// get time as LDT object
+			LocalDateTime timeLDT = LocalDateTime.now();
+			// format as string
+			String timeFormatted = timeLDT.format(formatter);
+			// set swipe in time
+			transaction.setSwipeInTime(LocalDateTime.parse(timeFormatted, formatter));
 			
 			// set transaction as session attribute
 			session.setAttribute("Transaction", transaction);
@@ -228,34 +235,40 @@ public class TransactionController {
 		
 		// get transaction and user object
 		Transaction transaction = (Transaction)session.getAttribute("Transaction");
-		User userThen = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
+		int userId = user.getUserId();
 		
-		// get station objects for end and start, given the Ids
+		// get station objects for end and start, given their IDs
 		trainStation startStation = transactionService.GetStationDetails(transaction.getStartStationId());
 		trainStation endStation = transactionService.GetStationDetails(stationId);
-		
-		// set end station and swipeOut time in transaction object
+		// set end station 
 		transaction.setEndStationId(stationId);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		transaction.setSwipeOutTime(LocalDateTime.now());
+		
+		// record and set swipeOut time in transaction object
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy MM dd");
+		// get time as LDT object
+		LocalDateTime timeLDT = LocalDateTime.now();
+		// format as string
+		String timeFormatted = timeLDT.format(formatter);
+		// set swipe out time
+		transaction.setSwipeOutTime(LocalDateTime.parse(timeFormatted, formatter));
 		
 		// calculate price of train journey 
 		double price = Math.abs(transaction.getEndStationId() - transaction.getStartStationId());
 		
-		// alter the balance of the user by taking away journey price
-		transactionService.TopUpBalance(userThen.getUserId(), -price);
+		// alter the balance of the user by taking away journey price via TopUp method(updates database) and setter (updates session attribute)
+		transactionService.TopUpBalance(userId, -price);
+		user.setBalance(user.getBalance()-price);
 		
-		// get user object after changing balance
-		User userEnd = (User)session.getAttribute("user");
-		
-		// add message to MAV and display on MainMenu view
-		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+userEnd.getBalance());
-		//modelAndView.setViewName("MainMenu");
+		// add message to MAV 
+		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+user.getBalance());
+		// add necessary objects for user fare receipt 
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("startStation", startStation);
 		modelAndView.addObject("endStation", endStation);
-		modelAndView.addObject("user", userEnd);
+		modelAndView.addObject("user", user);
 		modelAndView.addObject("transaction", transaction);
+		// display on summary view 
 		modelAndView.setViewName("Summary");
 		
 		return modelAndView;
