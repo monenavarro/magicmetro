@@ -58,6 +58,11 @@ public class TransactionController {
 		return modelAndView;
 	}
 	
+	// ==================Controllers for Main Menu ========================
+	@RequestMapping("/menu")
+	public ModelAndView mainMenuPageController() {
+		return new ModelAndView("MainMenu");
+	}
 	
 	// ==================Controller for checking User Login ========================
 	@RequestMapping("/checkUser")
