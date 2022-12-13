@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
+import com.magicmetro.entity.trainStation;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -84,6 +85,14 @@ public class TransactionServiceImpl implements TransactionService {
 		
 	}
 
+	@Override
+	public trainStation GetStationDetails(int stationId) {
+		// use trainStation-service api search station by Id method to get station object 
+		trainStation station = restTemplate.getForObject("http://localhost:8081/stations/"+stationId, trainStation.class);
+		// return the object 
+		return station;
+	}
+	
 //	@Override
 //	public boolean SwipeIn(int userId, String startStationName) {
 //		// validate balance 
@@ -105,5 +114,7 @@ public class TransactionServiceImpl implements TransactionService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

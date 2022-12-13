@@ -1,5 +1,9 @@
 package com.magicmetro.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
+import com.magicmetro.entity.trainStation;
 import com.magicmetro.service.TransactionService;
 
 @Controller
@@ -88,7 +94,11 @@ public class TransactionController {
 	
 	@RequestMapping("/logOut")
 	public ModelAndView logOutController() {
-		return new ModelAndView("/");
+		// create empty MAV 
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("message", "You have successfully Logged Out!");
+		modelAndView.setViewName("InputUserIdAndPassword");
+		return modelAndView;
 	}
 	
 	// ==================Controllers for Checking User Balance ========================
@@ -155,14 +165,47 @@ public class TransactionController {
 	}
 
 	@RequestMapping("/chooseStartStation")
-		public ModelAndView chooseStartStationController(HttpSession session, @RequestParam("stationId") int stationId ){
+		public ModelAndView chooseStartStationController(HttpSession session, @RequestParam("stationId") int stationId){
+		
 		ModelAndView modelAndView = new ModelAndView();
+		
 		// use session to get user object of logged in user and hence their userId
 		User userObj = (User) session.getAttribute("user");
 		int userId = userObj.getUserId();
-	
+		double userBalance = userObj.getBalance();
+		
+		// get station object details, given the Id
+		trainStation startStation = transactionService.GetStationDetails(stationId);
+		
+		
+		// check balance is sufficient 
+		boolean balanceStatus = transactionService.CheckUserBalance(userId);
+		if (balanceStatus == true) {
+			
+			// if balance is sufficient, record the transaction userId, start stationId and swipeIn time
+			Transaction transaction =  new Transaction();
+			transaction.setUserId(userId);
+			transaction.setStartStationId(stationId);
+			
+			// formatter, recording and formatting of timeStamp varibale for swipeIn time
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			transaction.setSwipeInTime(LocalDateTime.now());
+			
+			// set transaction as session attribute
+			session.setAttribute("Transaction", transaction);
+			// display message on subMenu view
+			modelAndView.addObject("message", "It is currently "+transaction.getSwipeInTime().format(formatter)+" you are on route from "+startStation.getStationName());
+			modelAndView.setViewName("subMenu");
+		}
+		else {
+			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+" please Top Up!");
+			modelAndView.setViewName("MainMenu");
+		}
+		
 		return modelAndView;
 	}
+	
+	
 	// ==================Controllers for Swiping Out ========================
 	
 	

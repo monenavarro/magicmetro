@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
+import com.magicmetro.entity.trainStation;
 
 public interface TransactionService {
 	
@@ -14,6 +15,8 @@ public interface TransactionService {
 	boolean CheckUserBalance(int userId);
 
 	boolean TopUpBalance(int userId, double increment);
+	
+	trainStation GetStationDetails(int stationId);
 	
 //	boolean SwipeIn(int userId, String startStationName);
 //	
