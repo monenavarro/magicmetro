@@ -140,8 +140,11 @@ public class TransactionController {
 		// use session to get user object of logged in user and hence their userId
 		User userObj = (User) session.getAttribute("user");
 		int userId = userObj.getUserId();
+		double oldBalance = userObj.getBalance();
 		// perform top up balance method of service (which uses update user balance method of user-service api)
 		boolean toppedUp = transactionService.TopUpBalance(userId, topUp);
+		// re-set the user object balance field 
+		userObj.setBalance(oldBalance+topUp);
 		
 		if (toppedUp == true) {
 			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by "+topUp);
@@ -187,9 +190,11 @@ public class TransactionController {
 			transaction.setUserId(userId);
 			transaction.setStartStationId(stationId);
 			
-			// formatter, recording and formatting of timeStamp varibale for swipeIn time
+			// formatter, recording and formatting of timeStamp variable for swipeIn time
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			transaction.setSwipeInTime(LocalDateTime.now());
+			LocalDateTime time = LocalDateTime.now();
+			time.format(formatter);
+			transaction.setSwipeInTime(time);
 			
 			// set transaction as session attribute
 			session.setAttribute("Transaction", transaction);
@@ -207,8 +212,53 @@ public class TransactionController {
 	
 	
 	// ==================Controllers for Swiping Out ========================
+	@RequestMapping("/swipeOut")
+		public ModelAndView swipeOutController(HttpSession session) {
+		return new ModelAndView("swipeOut");
+	}
 	
-	
+	@RequestMapping("/swipeOutInput")
+		public ModelAndView chooseEndStationController(HttpSession session, @RequestParam("stationId") int stationId) {
+		
+		// MAV object
+		ModelAndView modelAndView = new ModelAndView();
+		
+		// get transaction and user object
+		Transaction transaction = (Transaction)session.getAttribute("Transaction");
+		User userThen = (User)session.getAttribute("user");
+		
+		// get station objects for end and start, given the Ids
+		trainStation startStation = transactionService.GetStationDetails(transaction.getStartStationId());
+		trainStation endStation = transactionService.GetStationDetails(stationId);
+		
+		// set end station and swipeOut time in transaction object
+		transaction.setEndStationId(stationId);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime time = LocalDateTime.now();
+		time.format(formatter);
+		transaction.setSwipeOutTime(time);
+		
+		// calculate price of train journey 
+		double price = Math.abs(transaction.getEndStationId() - transaction.getStartStationId());
+		
+		// alter the balance of the user by taking away journey price
+		transactionService.TopUpBalance(userThen.getUserId(), -price);
+		
+		// get user object after changing balance
+		User userEnd = (User)session.getAttribute("user");
+		
+		// add message to MAV and display on MainMenu view
+		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+userEnd.getBalance());
+		modelAndView.setViewName("MainMenu");
+		modelAndView.addObject("price", price);
+		modelAndView.addObject("startStation", startStation);
+		modelAndView.addObject("endStation", endStation);
+		modelAndView.addObject("user", userEnd);
+		modelAndView.addObject("transaction", transaction);
+		modelAndView.setViewName("Summary");
+		
+		return modelAndView;
+	}
 	
 	
 	
