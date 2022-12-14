@@ -1,6 +1,15 @@
 package com.magicmetro.service;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.magicmetro.entity.User;
@@ -59,7 +68,11 @@ public class TransactionServiceImpl implements TransactionService {
 			
 			// top up balance with update user balance method from user-service api
 			restTemplate.put("http://localhost:8082/users/"+userId+"/"+increment, void.class);
-			
+//			HttpHeaders headers = new HttpHeaders();
+//	        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+//			HttpEntity<String> entity = new HttpEntity<String>("Balance was Topped Up Successfully", headers);
+//			String put = restTemplate.exchange("http://localhost:8082/users/"+userId+"/"+increment, HttpMethod.PUT, entity, String.class).getBody();
+//			System.out.println(put);
 			// get new instance of user object (with updated balance) using id argument through search by user id resource of user-service api
 			User userNow = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
 			// check balance after top up

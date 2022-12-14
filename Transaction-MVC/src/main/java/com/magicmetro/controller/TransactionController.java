@@ -31,10 +31,10 @@ public class TransactionController {
 	}
 	
 	// ==================Controllers for User Sign Up ========================
-	@RequestMapping("/signUp")
-	public ModelAndView UserSignUpController() {
-		return new ModelAndView("InputForSignUp");
-	}
+//	@RequestMapping("/signUp")
+//	public ModelAndView UserSignUpController() {
+//		return new ModelAndView("InputForSignUp");
+//	}
 	
 	@RequestMapping("/addUser")
 	public ModelAndView UserAddController(@RequestParam("userId") int userId, @RequestParam("password") String pass, @RequestParam("fullName") String name, @RequestParam("address") String adr, @RequestParam("phoneNumber") String phone, @RequestParam("balance") double bal, HttpSession session) {
@@ -53,7 +53,7 @@ public class TransactionController {
 		else {
 			modelAndView.addObject("message", "Failed to Sign Up, User already exists! Please try logging in or signing up with different details");
 			session.setAttribute("user", new User());
-			modelAndView.setViewName("InputForSignUp");
+			modelAndView.setViewName("InputUserIdAndPassword");
 		}
 		
 		return modelAndView;

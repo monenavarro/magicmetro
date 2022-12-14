@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class TransactionMvcApplication {
 	
 	@Bean 
-	public RestTemplate gettemplate() {
+	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
 
