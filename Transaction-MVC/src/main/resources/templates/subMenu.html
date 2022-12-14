@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+<h1> Magic Metro Sub Menu</h1>
+<h2>You Are Currently Swiped In</h2>
+<hr>
+<h3 th:text="'Welcome '+${session.user.fullName}+'!'"></h3>
+<hr>
+<a href="./swipeOut">Swipe Out</a><br><br>
+<h2 th:text="${message}"></h2>
+</body>
+</body>
+</html>

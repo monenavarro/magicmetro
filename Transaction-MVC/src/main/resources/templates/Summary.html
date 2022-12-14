@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Magic Metro System</h1>
+<hr>
+<h2>User Journey Receipt</h2>
+<table border="1">
+		<tr> 
+			<th>User ID</th>
+			<th>User Name</th>
+			<th>Starting Station</th>
+			<th>Ending Station</th>
+			<th>Swipe In Time</th>
+			<th>Swipe Out Time</th>
+			<th>Fare</th>
+		</tr>
+		<tr>
+			<td th:text="${transaction.userId}"></td>
+			<td th:text="${user.fullName}"></td>
+			<td th:text="${startStation.stationName}"></td>
+			<td th:text="${endStation.stationName}"></td>
+			<td th:text="${transaction.swipeInTime}"></td>
+			<td th:text="${transaction.swipeOutTime}"></td>
+			<td th:text="${price}"></td>
+		</tr>
+</table>
+<br><br>
+<h2 th:text="${message}"></h2>
+<a href="./menu">Go Back To Menu Page</a>
+</body>
+</html>
