@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.magicmetro.demo.TransactionMvcApplication;
 import com.magicmetro.entity.User;
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
 import com.magicmetro.service.TransactionServiceImpl;
 
 
@@ -121,14 +121,14 @@ class TransactionMvcApplicationTests {
 	
 	@Test
 	void testGetStationDetails() {
-		when(restTemplate.getForObject("http://localhost:8081/stations/"+1, trainStation.class)).thenReturn(new trainStation(1, "Platform 9 3/4"));
-		assertEquals(transactionServiceImpl.GetStationDetails(1), new trainStation(1, "Platform 9 3/4"));
+		when(restTemplate.getForObject("http://localhost:8081/stations/"+1, TrainStation.class)).thenReturn(new TrainStation(1, "Platform 9 3/4"));
+		assertEquals(transactionServiceImpl.GetStationDetails(1), new TrainStation(1, "Platform 9 3/4"));
 		
 	}
 
 	@Test
 	void testGetStationDetails2() {
-		when(restTemplate.getForObject("http://localhost:8081/stations/"+1, trainStation.class)).thenReturn(null);
+		when(restTemplate.getForObject("http://localhost:8081/stations/"+1, TrainStation.class)).thenReturn(null);
 		assertEquals(transactionServiceImpl.GetStationDetails(1), null);
 		
 	}

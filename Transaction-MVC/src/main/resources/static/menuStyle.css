@@ -1,23 +1,23 @@
 @charset "UTF-8";
 h1 {
 	color: white;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
+	font-family: tahoma;
 	font-size: 60px;
 }
 h2 {
 	color: white;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
+	font-family: tahoma;
 	font-size: 50px;
 }
 h3 {
 	color: white;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
+	font-family: tahoma;
 	font-size: 40px;
 }
 .main {
 	color:#cfaa01;
 	text-align: center;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
+	font-family: tahoma;
 	font-size: 30px;
 }
 

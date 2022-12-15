@@ -4,12 +4,13 @@ body {
 }
 h1 {
 	color: white;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
+	font-family: tahoma;
+	font-size: 30px;
 }
 h2 {
 	color: white;
-	font-family: "Lucida Handwriting", "Brush Script M7", cursive;
-	padding-top: 150px;
+	font-family: tahoma;
+	padding-top: 260px;
 }
 *{
 		box-sizing: border-box;
@@ -77,17 +78,17 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
 top:0px;
 position:absolute;
-width:60vw;
+width:50%;
 margin:auto;
-max-width:525px;
-min-height:59vw;
+max-width:80%;
+min-height:70vw;
   display: flex;align-items: center;
 justify-content: center;
     align-content:center;
-  height:70vw
+  height:100%;
 
  
-;
+
 background:rgba(200,200,200,0.1);
 box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -108,6 +109,8 @@ position:absolute;
 transform:rotateY(180deg);
 backface-visibility:hidden;
 transition:all .4s linear;
+font-size: 30px;
+font-family: tahoma;
 }
 .login-html .sign-in,
 .login-html .sign-up,
@@ -126,11 +129,13 @@ padding-bottom:1vw;
 margin:0 3vw 2vw 0;
 display:inline-block;
 border-bottom:2px solid transparent;
+font-family: tahoma;
 }
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab{
 color:#fff;
 border-color:#cfaa01;
+
 }
 .login-form{
 min-height:345px;
@@ -147,6 +152,7 @@ margin-bottom:2.4vw;
 width:100%;
 color:#fff;
 display:block;
+font-family: tahoma;
 }
 .login-form .group .input,
 .login-form .group .button{
@@ -154,6 +160,7 @@ border:none;
 padding:15px 20px;
 border-radius:25px;
 background:rgba(255,255,255,.1);
+font-family: tahoma;
 }
 .login-form .group input[data-type="password"]{
 
@@ -162,11 +169,12 @@ background:rgba(255,255,255,.1);
 .login-form .group .label{
 color:#aaa;
 font-size:12px;
+font-family: tahoma;
 }
-.login-form .group .button{
+/* .login-form .group .button{
 background:#cfaa01;
   color:#00203fff;
-}
+}  */
 .login-form .group label .icon{
 width:15px;
 height:15px;
@@ -214,11 +222,31 @@ transform:rotate(0);
 transform:rotate(0);
 }
 
+.login-form .group .button {
+  color: #f5fcff;
+  border: 3px solid #efae47;
+  border-radius:10px;
+  padding: 15px 25px;
+  font-size: 20px;
+  font-family: tahoma;
+  letter-spacing:5px;
+  cursor: pointer;
+  font-weight: bold;
+  filter: drop-shadow(0 0 10px #efae47) drop-shadow(0 0 30px #efae47) contrast(2) brightness(2);
+  transition: .5s;
+}
+
+.button:hover {
+  color: black;
+  background-color: #efae47;
+  filter: drop-shadow(0 0 20px #efae47) contrast(2) brightness(2);
+}
+
 .hr{
 height:2px;
 margin:60px 0 50px 0;
 background:rgba(255,255,255,.2);
-}
+}  
 .foot-lnk{
 text-align:center;
 }

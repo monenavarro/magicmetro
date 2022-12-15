@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.magicmetro.entity.User;
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
 import com.magicmetro.service.TransactionService;
 
 @RestController
@@ -42,7 +42,7 @@ public class TransactionResource {
 	}
 	
 	@GetMapping(path="/transactions/stations/{sid}", produces = MediaType.APPLICATION_JSON_VALUE) 
-	public trainStation GetStationDetails(@PathVariable("sid") int stationId) {
+	public TrainStation GetStationDetails(@PathVariable("sid") int stationId) {
 		return transactionService.GetStationDetails(stationId);
 	}
 	

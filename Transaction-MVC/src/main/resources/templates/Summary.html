@@ -2,13 +2,79 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel = "stylesheet" href = "summaryStyle.css">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 <h1>Magic Metro System</h1>
 <hr>
 <h2>User Journey Receipt</h2>
-<table border="1">
+<div class="bubbles">
+      
+      
+      
+      
+            <span style="--i:11"></span>
+            <span style="--i:19"></span>
+            <span style="--i:25"></span>
+            <span style="--i:15"></span>
+            <span style="--i:10"></span>
+            <span style="--i:25"></span>
+            <span style="--i:18"></span>
+            <span style="--i:7"></span>
+            <span style="--i:15"></span>
+            <span style="--i:23"></span>
+            <span style="--i:11"></span>
+            <span style="--i:16"></span>
+            <span style="--i:13"></span>
+            <span style="--i:22"></span>
+            <span style="--i:18"></span>
+            <span style="--i:16"></span>
+            <span style="--i:17"></span>
+            <span style="--i:19"></span>
+            <span style="--i:7"></span>
+            <span style="--i:22"></span>
+            <span style="--i:25"></span>
+            <span style="--i:29"></span>
+            <span style="--i:11"></span>
+            <span style="--i:28"></span>
+            <span style="--i:14"></span>
+            <span style="--i:19"></span>
+            <span style="--i:15"></span>
+            <span style="--i:11"></span>
+            <span style="--i:21"></span>
+            <span style="--i:27"></span>
+            <span style="--i:13"></span>
+            <span style="--i:18"></span>
+            <span style="--i:15"></span>
+            <span style="--i:13"></span>
+            <span style="--i:18"></span>
+            <span style="--i:21"></span>
+            <span style="--i:27"></span>
+        <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:20"></span>  <span style="--i:11"></span>  <span style="--i:7"></span>  <span style="--i:15"></span>  <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+      
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+      
+      
+      
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+      
+      
+      
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+      
+      
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+          
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>    
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>    
+       <span style="--i:27"></span>  <span style="--i:7"></span>  <span style="--i:27"></span>  <span style="--i:17"></span>  <span style="--i:12"></span>  <span style="--i:7"></span>
+   
+      
+		</div>
+	
+<table border="1" class ="table">
 		<tr> 
 			<th>User ID</th>
 			<th>User Name</th>
@@ -19,17 +85,18 @@
 			<th>Fare</th>
 		</tr>
 		<tr>
-			<td th:text="${transaction.userId}"></td>
-			<td th:text="${user.fullName}"></td>
-			<td th:text="${startStation.stationName}"></td>
-			<td th:text="${endStation.stationName}"></td>
-			<td th:text="${transaction.swipeInTime}"></td>
-			<td th:text="${transaction.swipeOutTime}"></td>
-			<td th:text="${price}"></td>
+			<td th:text="${transaction.userId}" class="td"></td>
+			<td th:text="${user.fullName}"class="td"></td>
+			<td th:text="${startStation.stationName}" class="td"></td>
+			<td th:text="${endStation.stationName}" class="td"></td>
+			<td th:text="${transaction.swipeInTime}" class="td"></td>
+			<td th:text="${transaction.swipeOutTime}" class="td"></td>
+			<td th:text="${price}" class="td"></td>
 		</tr>
 </table>
 <br><br>
-<h2 th:text="${message}"></h2>
+<h3 th:text="${message}"></h3>
 <a href="./menu">Go Back To Menu Page</a>
+</div>
 </body>
 </html>

@@ -1,4 +1,36 @@
 @charset "UTF-8";
+h1 {
+	color: white;
+	font-family: tahoma;
+	font-size: 60px;
+}
+h2 {
+	color: white;
+	font-family: tahoma;
+	font-size: 45px;
+}
+h3 {
+	color: white;
+	font-family: tahoma;
+	font-size: 30px;
+}
+
+.main {
+	color:#cfaa01;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 30px;
+}
+.main .td {
+	color:#cfaa01;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 20px;
+}
+.main .table {
+	margin-left: auto;
+	margin-right: auto;
+}
 
 *{
 		box-sizing: border-box;
@@ -50,7 +82,7 @@ flex-wrap:wrap}
       box-shadow:0px 0px 0px 2px #fff,0 0 20px #fff,0px 0px 40px #fff
 
         }
-        @keyframes fly {
+         @keyframes fly {
             0%{transform: translateY(100vh) scale(0%);}
             100%{transform: translateY(-10vh) scale(110%);}
         

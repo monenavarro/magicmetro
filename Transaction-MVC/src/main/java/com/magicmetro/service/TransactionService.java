@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
 
 public interface TransactionService {
 	
@@ -16,7 +16,7 @@ public interface TransactionService {
 
 	boolean TopUpBalance(int userId, double increment);
 	
-	trainStation GetStationDetails(int stationId);
+	TrainStation GetStationDetails(int stationId);
 	
 
 }

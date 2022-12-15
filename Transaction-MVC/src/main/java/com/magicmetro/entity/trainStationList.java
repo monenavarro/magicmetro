@@ -4,6 +4,6 @@ import java.util.List;
 
 public class trainStationList {
 	
-	List<trainStation> trainStations;
+	List<TrainStation> trainStations;
 
 }

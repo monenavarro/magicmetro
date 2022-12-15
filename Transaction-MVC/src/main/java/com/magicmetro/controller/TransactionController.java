@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.magicmetro.entity.Transaction;
 import com.magicmetro.entity.User;
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
 import com.magicmetro.service.TransactionService;
 
 @Controller
@@ -120,11 +120,11 @@ public class TransactionController {
 		boolean balanceStatus = transactionService.CheckUserBalance(userId);
 		
 		if (balanceStatus == true) {
-			modelAndView.addObject("message","Your Balance is Sufficient, it is currently : £"+userBalance);
+			modelAndView.addObject("message","Your Balance is Sufficient, it is currently : £"+userBalance+"0");
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
-			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+" please Top Up!");
+			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+"0 please Top Up!");
 			modelAndView.setViewName("MainMenu");
 		}
 		
@@ -153,7 +153,7 @@ public class TransactionController {
 		userObj.setBalance(oldBalance+topUp);
 		
 		if (toppedUp == true) {
-			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by £"+topUp);
+			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by £"+topUp+"0");
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
@@ -168,12 +168,12 @@ public class TransactionController {
 	@RequestMapping("/swipeIn")
 	public ModelAndView swipeInController(HttpSession session){
 		//timestamp start here
-		return new ModelAndView ("trainStationChoice");
+		return new ModelAndView ("swipeIn");
 		// model and view page option train stations
 		// model and view back to main menu with swipe in chosen + time stamp
 	}
 
-	@RequestMapping("/chooseStartStation")
+	@RequestMapping("/swipeInInput")
 		public ModelAndView chooseStartStationController(HttpSession session, @RequestParam("stationId") int stationId){
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -184,7 +184,7 @@ public class TransactionController {
 		double userBalance = userObj.getBalance();
 		
 		// get station object details, given the Id
-		trainStation startStation = transactionService.GetStationDetails(stationId);
+		TrainStation startStation = transactionService.GetStationDetails(stationId);
 		
 		
 		// check balance is sufficient 
@@ -198,7 +198,7 @@ public class TransactionController {
 			
 			// formatter, recording and formatting of timeStamp variable for swipeIn time
 			// record and set swipeIn time in transaction object
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy MM dd");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
 			// get time as LDT object
 			LocalDateTime timeLDT = LocalDateTime.now();
 			// format as string
@@ -213,7 +213,7 @@ public class TransactionController {
 			modelAndView.setViewName("subMenu");
 		}
 		else {
-			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+" please Top Up!");
+			modelAndView.addObject("message","Your Balance is Insufficient, it is currently : £"+userBalance+"0 please Top Up!");
 			modelAndView.setViewName("MainMenu");
 		}
 		
@@ -239,13 +239,13 @@ public class TransactionController {
 		int userId = user.getUserId();
 		
 		// get station objects for end and start, given their IDs
-		trainStation startStation = transactionService.GetStationDetails(transaction.getStartStationId());
-		trainStation endStation = transactionService.GetStationDetails(stationId);
+		TrainStation startStation = transactionService.GetStationDetails(transaction.getStartStationId());
+		TrainStation endStation = transactionService.GetStationDetails(stationId);
 		// set end station 
 		transaction.setEndStationId(stationId);
 		
 		// record and set swipeOut time in transaction object
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy MM dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
 		// get time as LDT object
 		LocalDateTime timeLDT = LocalDateTime.now();
 		// format as string
@@ -261,7 +261,7 @@ public class TransactionController {
 		user.setBalance(user.getBalance()-price);
 		
 		// add message to MAV 
-		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+user.getBalance());
+		modelAndView.addObject("message", "You have successfully swiped out at "+transaction.getSwipeOutTime().format(formatter)+"! Your new balance is : £"+user.getBalance()+"0");
 		// add necessary objects for user fare receipt 
 		modelAndView.addObject("price", price);
 		modelAndView.addObject("startStation", startStation);

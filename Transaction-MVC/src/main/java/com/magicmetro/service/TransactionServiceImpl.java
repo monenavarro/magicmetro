@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.magicmetro.entity.User;
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -94,9 +94,9 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public trainStation GetStationDetails(int stationId) {
+	public TrainStation GetStationDetails(int stationId) {
 		// use trainStation-service api search station by Id method to get station object 
-		trainStation station = restTemplate.getForObject("http://localhost:8081/stations/"+stationId, trainStation.class);
+		TrainStation station = restTemplate.getForObject("http://localhost:8081/stations/"+stationId, TrainStation.class);
 		// return the object 
 		return station;
 	}

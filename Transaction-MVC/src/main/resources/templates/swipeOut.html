@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel = "stylesheet" href = "swipeOutStyle.css">
+    <link rel = "stylesheet" href = "swipeInStyle.css">
     <title>Title</title>
 </head>
 <body>
@@ -80,11 +80,11 @@
       
 		</div>
 
-<form action = "./swipeOutInput" method="post">
+<form action = "./swipeOutInput" method ="post">
 
-<label for="stationId">Choose the Train Station you are Swiping Out at:</label>
-
-<select name="stationId" id="stationId">
+<div class="group">
+<label for="stationId" class="label">Choose your final train station:</label>
+<select name="stationId" id="stationId" class="list">
     <option value="1">Platform 9 3/4</option>
     <option value="2">Narnia</option>
     <option value="3">Polar Express</option>
@@ -92,8 +92,10 @@
     <option value="5">Hogwarts </option>
 </select>
 
-<input type = "submit" value = "Get Off Train">
+<input type = "submit" value = "Get Off Train" class="button"><br>
+</div><br><br>
 </form>
+<img th:src="@{images/Header.png}" id="trainStations" width="100%">
 </div>
 </body>
 </html>
