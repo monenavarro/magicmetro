@@ -150,7 +150,7 @@ public class TransactionController {
 		userObj.setBalance(oldBalance+topUp);
 		
 		if (toppedUp == true) {
-			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by £"+topUp);
+			modelAndView.addObject("message","Your Balance was Successfully Topped Up by : £"+topUp);
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
@@ -191,8 +191,7 @@ public class TransactionController {
 			// if balance is sufficient, record the transaction userId, start stationId and swipeIn time
 			Transaction transaction =  new Transaction();
 			transaction.setUserId(userId);
-			transaction.setStartStationId(stationId);
-			
+			transaction.setStartStationId(stationId);	
 			// formatter, recording and formatting of timeStamp variable for swipeIn time
 			// record and set swipeIn time in transaction object
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm yyyy MM dd");
@@ -201,8 +200,7 @@ public class TransactionController {
 			// format as string
 			String timeFormatted = timeLDT.format(formatter);
 			// set swipe in time
-			transaction.setSwipeInTime(LocalDateTime.parse(timeFormatted, formatter));
-			
+			transaction.setSwipeInTime(LocalDateTime.parse(timeFormatted, formatter));			
 			// set transaction as session attribute
 			session.setAttribute("Transaction", transaction);
 			// display message on subMenu view
