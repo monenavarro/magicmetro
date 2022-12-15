@@ -84,7 +84,7 @@
 <form action = "./topUpBalance" method = "post">
 <div class="group">
 		<label for="topUp" class="label">Enter Top Up Amount</label>
-		<input id="topUp" type="text" name="topUp" class="input">
+		<input id="topUp" type="number" name="topUp" class="input">
 </div>
 	<div class="group">
 		<input type="submit" class="button" value="Top Up Balance">
@@ -92,7 +92,8 @@
 	
 <h2 th:text="${message}"></h2>
 </form>
-
+<br><br><br>
+<a href="./menu" class ="a">Menu</a>
 </div>
 </body>
 </html>

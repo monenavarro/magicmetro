@@ -15,6 +15,7 @@ h2 {
 	font-family: tahoma;
 	font-size: 30px;
 }
+.main .a,
 .main .group .input,
 .main .group .button{
 	background:#cfaa01;

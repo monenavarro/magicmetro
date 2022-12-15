@@ -152,8 +152,8 @@ public class TransactionController {
 		// re-set the user object balance field 
 		userObj.setBalance(oldBalance+topUp);
 		
-		if (toppedUp == true) {
-			modelAndView.addObject("message","Your Balance is was Successfully Topped Up by £"+topUp+"0");
+		if (toppedUp == true && topUp > 0) {
+			modelAndView.addObject("message","Your Balance was Successfully Topped Up by £"+topUp+"0");
 			modelAndView.setViewName("MainMenu");
 		}
 		else {
