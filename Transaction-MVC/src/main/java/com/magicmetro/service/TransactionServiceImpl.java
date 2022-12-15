@@ -55,16 +55,13 @@ public class TransactionServiceImpl implements TransactionService {
 		User userThen = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
 		if (userThen != null) { //if user exists,
 			// check balance before top up
-			double balanceBefore = userThen.getBalance();
-			
+			double balanceBefore = userThen.getBalance();	
 			// top up balance with update user balance method from user-service api
 			restTemplate.put("http://localhost:8082/users/"+userId+"/"+increment, void.class);
-			
 			// get new instance of user object (with updated balance) using id argument through search by user id resource of user-service api
 			User userNow = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
 			// check balance after top up
 			double balanceAfter = userNow.getBalance();
-
 			// if the balance was successfully updated, return will be true otherwise false
 			if (balanceAfter - balanceBefore != 0) {
 				return true;
@@ -77,13 +74,12 @@ public class TransactionServiceImpl implements TransactionService {
 		else {
 			return false;
 		}
-		
-	}
+	}	
 
 	@Override
 	public TrainStation GetStationDetails(int stationId) {
 		// use trainStation-service api search station by Id method to get station object 
-		TrainStation station = restTemplate.getForObject("http://localhost:8081/stations/"+stationId, TrainStation.class);
+		TrainStation station = restTemplate.getForObject("http://localhost:8084/stations/"+stationId, TrainStation.class);
 		// return the object 
 		return station;
 	}
