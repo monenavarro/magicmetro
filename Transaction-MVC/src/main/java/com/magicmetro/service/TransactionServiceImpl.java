@@ -1,6 +1,9 @@
 package com.magicmetro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.magicmetro.entity.User;
@@ -54,27 +57,27 @@ public class TransactionServiceImpl implements TransactionService {
 		// get user object using id argument through search by user id resource of user-service api
 		User userThen = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
 		if (userThen != null) { //if user exists,
-			// check balance before top up
-			double balanceBefore = userThen.getBalance();	
-			// top up balance with update user balance method from user-service api
-			restTemplate.put("http://localhost:8082/users/"+userId+"/"+increment, void.class);
-			// get new instance of user object (with updated balance) using id argument through search by user id resource of user-service api
-			User userNow = restTemplate.getForObject("http://localhost:8082/users/"+userId, User.class);
-			// check balance after top up
-			double balanceAfter = userNow.getBalance();
-			// if the balance was successfully updated, return will be true otherwise false
-			if (balanceAfter - balanceBefore != 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
+		
+			// top up balance with update user balance resource from user-service api via exchange method of restTemplate
+			// set headers and entity for exchange method parameters
+			HttpHeaders headers = new HttpHeaders();
+		    HttpEntity<String> entity = new HttpEntity<String>("worked",headers);
+		    String exchange = restTemplate.exchange("http://localhost:8082/users/"+userId+"/"+increment, HttpMethod.PUT, entity, String.class).getBody();
+		    
+		    // if the returned string from the rt.exchange method is "Balance Updated" (the return of the user-service top up balance resource when it works)
+		    if (exchange.equals("Balance Updated")) {
+		    	return true;
+		    }
+		    else {
+		    	return false;
+		    }
 		}
 		// if user does not exist, return false
 		else {
 			return false;
 		}
-	}	
+		
+	}
 
 	@Override
 	public TrainStation GetStationDetails(int stationId) {

@@ -48,8 +48,8 @@ body {
 
 .bubbles span:nth-child(odd) {
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: #ddd;
     margin: 5px;
@@ -60,8 +60,8 @@ body {
 
 .bubbles span:nth-child(even) {
   position: relative;
-  width: 12px;
-  height: 12px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   margin: 0px;
   animation: fly 10s linear infinite;
@@ -127,25 +127,12 @@ body {
  .info {
 	 border: 3px solid;
 	 border-width: 0 3px 3px 0;
-	 padding: 8px;
-}
-.info platform{
-	font: 400 13px "Questrial", sans-serif;
-	 letter-spacing: 0.5px; 
-	 text-align: center;
-	  /* letter-spacing: 1px;
-	 margin: 4px 0; */
-	
+	 padding: 4px;
 }
  .info__item {
 	 font: 400 13px "Questrial", sans-serif;
 	 letter-spacing: 0.5px;
-
 }
-/* .number{
- font: 400 13px "Questrial", sans-serif;
-	 letter-spacing: 0.5px;
-} */
  .info__detail {
 	 font: 700 20px/1 "Jura";
 	 letter-spacing: 1px;
@@ -185,7 +172,6 @@ body {
 }
  .platform .number div:nth-child(1) {
 	 position: absolute;
-	 left: 16px;
 	 font: 900 90px/1 "Old Standard TT";
 }
  .platform .number span {
@@ -289,14 +275,10 @@ body {
 	 writing-mode: vertical-rl;
 	 transform: rotate(180deg);
 }
-.ticket__side .info.side-arrive {
+ .ticket__side .info.side-arrive {
 	 margin-top: 10px;
-	 border-width: 3px; 
-	/*   grid-column: 3 / span 1;
-	 grid-row: 1;
-	 margin-top: 10px;
-	 border-width: 3px 0 3px 3px; */
-} 
+	 border-width: 3px;
+}
  .ticket__side .info.side-date {
 	 grid-column-start: 3;
 	 border-right: none;
