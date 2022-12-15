@@ -1,9 +1,15 @@
 package com.magicmetro.persistence;
 
-import com.magicmetro.entity.trainStation;
+import com.magicmetro.entity.TrainStation;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface trainStationDao extends JpaRepository<trainStation, Integer> {
+public interface TrainStationDao extends JpaRepository<TrainStation, Integer> {
+
+    @Query("from TrainStation where stationId=:id")
+    TrainStation searchTrainStationById(@Param("id") int id);
 }

@@ -1,7 +1,13 @@
 package com.magicmetro.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
+import com.magicmetro.entity.TrainStation;
 
-public interface trainStationService {
+public interface TrainStationService {
+	
+	List<TrainStation> listAllTrainStations();
+	
+	TrainStation searchTrainStationById(int id);
+	
 }

@@ -1,8 +1,9 @@
 package com.magicmetro.entity;
 
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,9 @@ public class User {
 	private String fullName;
 	private String address;
 	private String phoneNumber;
-	private double balance;
+	private double balance; 
+
 	
+	
+
 }
