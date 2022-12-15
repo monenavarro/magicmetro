@@ -32,10 +32,23 @@ Our first step was designing the wireframe of *Magic Metro* webapp: <br />
 We used *Trello* to plan and organise our tickets for deploying each feature, moving them along as we completed our sprints.
 <br />
 <br /><img width="1280" alt="Screenshot 2022-12-11 at 19 01 18" src="https://user-images.githubusercontent.com/99498365/206923424-3649bca1-72ec-4c33-a580-80cce0a51a03.png">
+<br />
+<br />
+<br />
+**Entity Relationship Diagram**
+<br />
+<br />
+![Screenshot 2022-12-15 at 12 33 44](https://user-images.githubusercontent.com/99498365/207860492-22dd9f45-3fc6-48fd-8334-8ae0882d9926.png)
 
 ## Tech Stack ⚡
-
-## Installation 🛠️
+* Java
+* SpringBoot
+* RestTemplate
+* Thymeleaf
+* JUnit
+* MySQL
+* HTML & CSS
+* Discord
 
 ## Snippets of *Magic Metro* Deployed and Running ⭐
 
