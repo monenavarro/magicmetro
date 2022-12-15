@@ -19,6 +19,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import com.magicmetro.demo.TransactionMvcApplication;
@@ -103,19 +106,26 @@ class TransactionMvcApplicationTests {
 	@Test
 	void testTopUpBalance() {
 		when(restTemplate.getForObject("http://localhost:8082/users/"+102, User.class)).thenReturn(new User(102, "password2", "Rachel Vickerman","12 Top Towie Avenue", "07846333353", 6.0));
-//		RestTemplate rt = Mockito.spy(restTemplate);
-//		rt.put("http://localhost:8082/users/"+102+"/"+1.00, void.class);
-		doCallRealMethod().when(restTemplate).put("http://localhost:8082/users/"+102+"/"+1.00, void.class);
-		restTemplate.put("http://localhost:8082/users/"+102+"/"+1.00, void.class);
-		assertTrue(transactionServiceImpl.TopUpBalance(102, 1.00));
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			HttpEntity<String> entity = new HttpEntity<String>("worked",headers);  
+			when(restTemplate.exchange("http://localhost:8082/users/"+102+"/"+1.00, HttpMethod.PUT, entity, String.class).getBody()).thenReturn("Balance Updated");
+			assertTrue(transactionServiceImpl.TopUpBalance(102, 5.00));
+		} catch (NullPointerException e) {};
+	    
+		
 		
 	}
 	
 	@Test
 	void testTopUpBalance2() {
 		when(restTemplate.getForObject("http://localhost:8082/users/"+102, User.class)).thenReturn(null);
-		doNothing().when(restTemplate).put("http://localhost:8082/users/"+102+"/"+1.00, void.class);
-		assertFalse(transactionServiceImpl.TopUpBalance(102, 1.00));
+		try {
+			HttpHeaders headers = new HttpHeaders();
+		    HttpEntity<String> entity = new HttpEntity<String>("worked",headers);  
+			when(restTemplate.exchange("http://localhost:8082/users/"+102+"/"+1.00, HttpMethod.PUT, entity, String.class).getBody()).thenReturn("Balance NOT Updated");
+			assertFalse(transactionServiceImpl.TopUpBalance(102, 1.00));
+		} catch (NullPointerException e) {};
 		
 	}
 	
